@@ -57,18 +57,6 @@
 
 <hr>
 	<div class="row">
-		<div class="form-group col-md flex-grow-0">
-			<label>Quantity</label>
-			<div class="input-group mb-3 input-spinner">
-			  <div class="input-group-prepend">
-			    <button class="btn btn-light" type="button" id="button-plus"> + </button>
-			  </div>
-			  <input type="text" class="form-control" value="1">
-			  <div class="input-group-append">
-			    <button class="btn btn-light" type="button" id="button-minus"> &minus; </button>
-			  </div>
-			</div>
-		</div> <!-- col.// -->
 		<div class="form-group col-md">
 				<label>Select size</label>
 				<div class="mt-2">
@@ -91,8 +79,12 @@
 		</div> <!-- col.// -->
 	</div> <!-- row.// -->
 	{% if single_product.stock > 0 %}
-	<a href="#" class="btn  btn-primary"> Buy now </a>
-	<a href="#" class="btn  btn-outline-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+		{% if is_in_cart %}
+		<a href='#' class="btn btn-success disabled"> <span class="text">Added to cart</span> <i class="fas fa-check"></i>  </a>
+		<a href={% url "cart" %} class="btn btn-outline-primary"> <span class="text">View cart</span> <i class="fas fa-eye"></i>  </a>
+		{% else %}
+		<a href={% url "add_to_cart" single_product.id %} class="btn btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+		{% endif %}
 	{% else %}
 	<p class="text-danger"><b> Out of Stock </b></p>
 	{% endif %}

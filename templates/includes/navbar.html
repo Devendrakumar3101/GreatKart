@@ -6,6 +6,7 @@
     <div class="container">
         <ul class="navbar-nav d-none d-md-flex mr-auto">
             <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/">{{request.user}}</a></li>
             <li class="nav-item"><a class="nav-link" href="/store/">Store</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Delivery</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Payment</a></li>
@@ -47,16 +48,20 @@
         <div class="col-lg-4 col-sm-6 col-12">
             <div class="widgets-wrap float-lg-right">
                 <div class="widget-header  mr-3">
-                    <a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></a>
-                    <span class="badge badge-pill badge-danger notify">0</span>
+                    <a href={% url "cart" %} class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></a>
+                    <span class="badge badge-pill badge-danger notify">{{total_cart}}</span>
                 </div>
                 <div class="widget-header icontext">
                     <a href="#" class="icon icon-sm rounded-circle border"><i class="fa fa-user"></i></a>
                     <div class="text">
-                        <span class="text-muted">Welcome!</span>
+                        <span class="text-muted">Welcome {{user.first_name}}</span>
                         <div> 
-                            <a href="#">Sign in</a> |  
-                            <a href="#"> Register</a>
+                          {% if request.user.is_anonymous %}
+                            <a href={% url 'loginPage' %}>Login</a> |  
+                            <a href={% url 'registerPage' %}>Register</a>
+                          {% else %}
+                            <a href={% url 'logoutPage' %} class='text-danger'>Logout</a>
+                          {% endif %}
                         </div>
                     </div>
                 </div>
