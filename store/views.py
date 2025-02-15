@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponse
 from .models import Product
 from carts.models import Cart, CartItem
+from django.db.models import Q
+from django.core.paginator import Paginator
 
 # Create your views here.
 def store(request, category_slug=None):
@@ -8,16 +10,30 @@ def store(request, category_slug=None):
     if category_slug is not None:
         products = Product.objects.all().filter(category__slug = category_slug, is_available = True)
         product_count = products.count()
-        
+    
     else:
         products = Product.objects.all().filter(is_available = True)
         product_count = products.count()
+    
+    if request.GET.get('search'):
+        products = Product.objects.all().filter(Q(product_name__icontains = request.GET.get('search')) | 
+                                                Q(description__icontains = request.GET.get('search')),
+                                                is_available = True
+                                                )
+        product_count = products.count()
+
+    paginator = Paginator(products, 4)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+    
 
     context = {
-        'products':products,
+        'products':page_obj,
         'product_count':product_count,
-
+        'paginator' : paginator,
+        'page_obj' : page_obj,
     }
+
     return render(request, 'store/store.html', context)
 
 # def product_by_category(request, category_slug):
