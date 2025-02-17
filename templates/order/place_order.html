@@ -31,68 +31,32 @@
 
 <div class="row">
 	<aside class="col-lg-6">
-		<div class="card">
+		<div class="card mb-2">
 			<div class="card-body">
-				<h4 class="card-title mb-4">Billing Address</h4>
-
-				<form action={% url "place_order" %} method="post">
-					{% csrf_token %}
-					<div class="form-row">
-						<div class="col form-group">
-							<label>First Name</label>
-							<input type="text" name="first_name" class="form-control" required>
-						</div>
-						<div class="col form-group">
-							<label>Last Name</label>
-							<input type="text" name="last_name" class="form-control" required>
-						</div>
-					</div>
-					<div class="form-row">
-						<div class="col form-group">
-							<label>Email</label>
-							<input type="email" name="email" class="form-control" required>
-						</div>
-						<div class="col form-group">
-							<label>Phone Number</label>
-							<input type="number" name="phone" class="form-control" required>
-						</div>
-					</div>
-					<div class="form-row">
-						<div class="col form-group">
-							<label>Address Line 1</label>
-							<input type="text" name="address_line_1" class="form-control" required>
-						</div>
-						<div class="col form-group">
-							<label>Address Line 2</label>
-							<input type="text" name="address_line_2" class="form-control">
-						</div>
-					</div>
-					<div class="form-row">
-						<div class="col form-group">
-							<label>City</label>
-							<input type="text" name="city" class="form-control" required>
-						</div>
-						<div class="col form-group">
-							<label>State</label>
-							<input type="text" name="state" class="form-control" required>
-						</div>
-					</div>
-					<div class="form-row">
-						<div class="col form-group">
-							<label>Country</label>
-							<input type="text" name="country" class="form-control" required>
-						</div>
-						<div class="col form-group">
-							<label>Pin Code</label>
-							<input type="number" name="pincode" class="form-control" required>
-						</div>
-					</div>
-				
-
+				<h4 class="card-title mb-4">Your Billing Address :</h4>
+                <p>
+                    Name : {{order_details.first_name}} {{order_details.last_name}} <br>
+                    Email : {{order_details.email}} <br>
+                    Phone : {{order_details.phone}} <br>
+                    Address : {{order_details.address_line_1}}, {{order_details.address_line_2}}, {{order_details.city}}, {{order_details.pincode}} <br>
+                    State : {{order_details.state}} <br>
+                    Country : {{order_details.country}} <br>
+                    </p>
 			</div>
-
-
+        </div>
+		<div class="card mb-2">
+			<div class="card-body">
+				<h4 class="card-title mb-4">Payment Method :</h4>
+                <p>this is your billing address thank you</p>
+			</div>
+        </div>
+		<div class="card mb-2">
+			<div class="card-body">
+				<h4 class="card-title mb-4">Review Products :</h4>
+                <p>this is your billing address thank you</p>
+			</div>
 		</div> <!-- card.// -->
+
 	</aside> <!-- col.// -->
 
 	<aside class="col-lg-6">
@@ -163,11 +127,11 @@
 				  <dd class="text-right text-dark b"><strong>${{grand_total_price}}.00</strong></dd>
 				</dl>
 				
-				<button type="submit" class="btn btn-primary btn-block">Place Order</button>
-				<a href={% url "store" %} class="btn btn-light btn-block">Continue Shopping</a>
+				<a href={% url "make_payment" %} class="btn btn-primary btn-block">Make Payment</a>
+				<!-- <a href={% url "store" %} class="btn btn-light btn-block">Continue Shopping</a> -->
 			</div>
-			</form>
 		</div> <!-- card-body.// -->
+        
 
 		</div> <!-- card.// -->
 

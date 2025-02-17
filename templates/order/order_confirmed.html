@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- ========================= SECTION CONTENT START// ========================= -->
+
+<section class="section-content padding-y bg">
+    <div class="container">
+        <h3>Order Confirmation Page</h3>
+
+		<!--   message start   -->
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+        <!--   message end   -->
+
+    </div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock content %}
